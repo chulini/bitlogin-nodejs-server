@@ -1,0 +1,25 @@
+{
+  "name": "bitlogin-nodejs-server",
+  "version": "1.0.0",
+  "description": "Implementation of bitlogin authentication in a websocket server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chulini/bitlogin-nodejs-server.git"
+  },
+  "keywords": [
+    "bitlogin"
+  ],
+  "author": "Julio Quiroz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chulini/bitlogin-nodejs-server/issues"
+  },
+  "homepage": "https://github.com/chulini/bitlogin-nodejs-server#readme",
+  "dependencies": {
+    "ws": "^7.3.1"
+  }
+}
