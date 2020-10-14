@@ -20,6 +20,10 @@
   },
   "homepage": "https://github.com/chulini/bitlogin-nodejs-server#readme",
   "dependencies": {
+    "bip32": "^2.0.6",
+    "bip39": "^3.0.2",
+    "bitcoinjs-lib": "^5.2.0",
+    "bitcoinjs-message": "^2.1.3",
     "ws": "^7.3.1"
   }
 }
