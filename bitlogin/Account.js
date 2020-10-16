@@ -5,6 +5,14 @@ module.exports = class Account {
         this._messageToBeSigned = messageToBeSigned;
     }
 
+    static get VerificationState() {
+        return {
+            unknown: 0,
+            unverified: 1,
+            verified: 2
+        }
+    }
+
     get legacyAddress() {
         return this._legacyAddress;
     }
@@ -17,12 +25,9 @@ module.exports = class Account {
         return this._currentVerificationState;
     }
 
-    static get VerificationState() {
-        return {
-            unknown: 0,
-            unverified: 1,
-            verified: 2
-        }
+    SetVerificationState(newVerificationState) {
+        return this._currentVerificationState = newVerificationState;
     }
+
 
 }

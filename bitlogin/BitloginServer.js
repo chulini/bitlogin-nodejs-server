@@ -51,6 +51,7 @@ module.exports = class BitloginServer {
                 verifyMeMessage.signature
             );
             if (verified) {
+                accountToBeVerified.SetVerificationState(Account.VerificationState.verified);
                 return {
                     messageName: "AuthenticationSuccess"
                 }
@@ -58,5 +59,32 @@ module.exports = class BitloginServer {
             throw GetError(400);
         }
         throw GetError(200);
+    }
+
+    GetVerificationStateOfAccount(legacyAddress) {
+        if (this._accountsByLegacyAddress.hasOwnProperty(legacyAddress)) {
+            console.log(`${JSON.stringify(this._accountsByLegacyAddress[legacyAddress], null, " ")}`);
+            return this._accountsByLegacyAddress[legacyAddress].currentVerificationState;
+        }
+        return Account.VerificationState.unknown;
+    }
+
+    LogOutRequest(logOutRequestMessage) {
+        if (this._accountsByLegacyAddress.hasOwnProperty(logOutRequestMessage.legacyAddress)) {
+            let verified = SignatureVerifier.VerifySignature(
+                logOutRequestMessage.legacyAddress,
+                `LogOut${logOutRequestMessage.legacyAddress}`,
+                logOutRequestMessage.signature
+            );
+
+            if (verified) {
+                delete this._accountsByLegacyAddress[logOutRequestMessage.legacyAddress];
+                return {
+                    messageName: "LogOutSuccess"
+                }
+            }
+            return new GetError(400);
+        }
+        return new GetError(600);
     }
 };

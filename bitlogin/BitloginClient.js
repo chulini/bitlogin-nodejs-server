@@ -35,6 +35,9 @@ module.exports = class BitloginClient {
             redeem: bitcoin.payments.p2wpkh({ pubkey: node.publicKey, network })
         }).address;
     }
+    get LegacyAddress() {
+        return this._legacyAddress;
+    }
 
     GetHiMessage() {
         let thisClient = this;
@@ -56,6 +59,15 @@ module.exports = class BitloginClient {
             signature: this.SignMessage(okSignThisMessage.messageToSign),
             legacyAddress: this._legacyAddress,
             publicIdIWantToHave: this._publicId
+        }
+    }
+
+    GetLogOutRequestMessage() {
+        let signature = this.SignMessage(`LogOut${this._legacyAddress}`);
+        return {
+            messageName: "LogOut",
+            legacyAddress: this._legacyAddress,
+            signature: signature
         }
     }
 
